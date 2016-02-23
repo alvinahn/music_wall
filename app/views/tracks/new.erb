@@ -1,0 +1,34 @@
+<% if @track && @track.errors.any? %>
+  <div>
+    <strong>Some issues with your message, please fix them:</strong>
+    <ul>
+      <% @track.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+    </ul>
+  </div>
+<% end %>
+
+
+
+<form class="basic-grey" method="post" action="/tracks">
+  <h1>Create a New Track</h1>
+  <div>
+    <label>Title:</label>
+    <input type="text" name="title" value="<%= @track && @track.title %>">
+  </div>
+  <div>
+    <label>Author:</label>
+    <input type="text" name="author" value="<%= @track && @track.author %>">
+  </div>
+  <div>
+    <label>URL:</label>
+    <input type="text" name="url" value="<%= @track && @track.url %>">
+  </div>
+  <div>
+    <input type="submit" class="button" Value="Submit">  
+  </div>
+</form>
+<p>
+  <a href="/tracks">Back to track list</a>
+</p>
