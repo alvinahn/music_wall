@@ -1,4 +1,4 @@
-class CreateTracks < ActiveRecord::Migration
+class CreateTracksTable < ActiveRecord::Migration
   def change
     create_table :tracks do |t|
       t.string :title

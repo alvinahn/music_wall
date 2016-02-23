@@ -1,6 +1,13 @@
 # Homepage (Root path)
+
+enable :sessions
+
 get '/' do
-  erb :index
+  @tracks = Track.all
+  if session["user"] != nil
+    @user = User.find(session["user"])
+  end
+  erb :'tracks/index'
 end
 
 get '/tracks' do
@@ -16,7 +23,8 @@ post '/tracks' do
   @track = Track.new(
     title: params[:title],
     author: params[:author],
-    url: params[:url]
+    url: params[:url],
+    user_id: session["user"]
     )
   if @track.save
     redirect '/tracks'
@@ -28,4 +36,40 @@ end
 get '/tracks/:id' do
   @track = Track.find params[:id]
   erb :'tracks/show'
+end
+
+get '/users/signup' do
+  erb :'users/signup'
+end
+
+post '/users/signup' do
+  @user = User.new(
+    email: params[:email],
+    password: params[:password]
+    )
+  if @user.save
+    redirect '/'
+  else
+    erb :'users/signup'
+  end
+end
+
+get '/users/signin' do
+  user_email=params[:email]
+  @user = User.find_by(
+    email: params[:email],
+    password: params[:password]
+    )
+  if @user != nil
+    session["user"] = @user.id
+    session["email"]=user_email
+    redirect '/'
+  else
+    erb :'users/signin'
+  end
+end
+
+post '/users/signout' do
+  session["user"] = nil
+  redirect '/'
 end

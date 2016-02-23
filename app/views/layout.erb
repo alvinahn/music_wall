@@ -19,9 +19,22 @@
 </head>
 <body class="container">
   <nav>
-    <a class="nav_text" href="/">Home</a>
-    <a class="nav_text" href="/tracks">Track</a>
-    <a class="nav_text" href="/tracks/new">New Track</a>
+    <ul>
+      <li> <a class="nav_text" href="/">Home</a> </li>
+      <li> <a class="nav_text" href="/tracks/new">New Track</a> </li>
+      <li> <a class="nav_text" href="/users/signup">Sign up</a> </li>
+      <li> <a class="nav_text" href="/users/signin">Sign in</a> </li>
+      <li> <form class="nav_text" method="POST" action="/users/signout">
+      <input type="submit" Value="Sign out">
+      </form> </li>
+      <li class="nav_text">  
+        <% if session["user"] != nil %>
+          <p>Welcome <%= session[:email] %></p>
+        <% else %>
+          <br>
+        <% end %>
+      </li>
+    </ul>
   </nav>
   <%= yield %>
 </body>

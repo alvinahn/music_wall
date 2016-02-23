@@ -4,13 +4,38 @@
   font-family: "Copperplate";
 }
 
+nav ul li {
+    display: inline;
+}
+
+nav ul p {
+    text-align: right;
+    color: #777;
+}
+
+nav ul {
+    list-style-type: none;
+    text-align: center;
+}
+
+nav ul li form input {
+    background: transparent;
+    border: none
+}
+nav ul li form input:hover {
+    color: #23527c;
+    text-decoration: underline;
+}
 
 .nav_text {
   font-size: 20px;
-  padding-right: 50px;
-  padding-left: 18px;
+  padding-right: 70px;
+  padding- left: 70px;
   color: white;
   font-family: "Copperplate";
+  display: inline;
+  background: transparent;
+  border: none;
 }
 
 
@@ -48,7 +73,7 @@
     margin-top: 10px;
     color: #888;
 }
-.basic-grey input[type="text"], .basic-grey input[type="email"], .basic-grey textarea, .basic-grey select {
+.basic-grey input[type="text"], .basic-grey input[type="email"], .basic-grey textarea, .basic-grey select, .basic-grey input[type="password"] {
     border: 1px solid #DADADA;
     color: #888;
     height: 30px;
