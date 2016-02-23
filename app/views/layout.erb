@@ -24,14 +24,12 @@
       <li> <a class="nav_text" href="/tracks/new">New Track</a> </li>
       <li> <a class="nav_text" href="/users/signup">Sign up</a> </li>
       <li> <a class="nav_text" href="/users/signin">Sign in</a> </li>
-      <li> <form class="nav_text" method="POST" action="/users/signout">
+      <li> <form class="nav_text" method="GET" action="/users/signout">
       <input type="submit" Value="Sign out">
       </form> </li>
       <li class="nav_text">  
         <% if session["user"] != nil %>
           <p>Welcome <%= session[:email] %></p>
-        <% else %>
-          <br>
         <% end %>
       </li>
     </ul>

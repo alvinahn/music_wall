@@ -1,3 +1,18 @@
+.right {
+    text-align: right;
+    display: inline-block;
+    float: right;
+    margin-right: 11px;
+}
+
+.from1 {
+    display: inline-block;
+}
+
+ul, ol {
+    margin-bottom: -20px;
+}
+
 .more_track {
   text-align: right;
   color: white;
@@ -73,7 +88,7 @@ nav ul li form input:hover {
     margin-top: 10px;
     color: #888;
 }
-.basic-grey input[type="text"], .basic-grey input[type="email"], .basic-grey textarea, .basic-grey select, .basic-grey input[type="password"] {
+.basic-grey input[type="text"], .basic-grey input[type="email"], .basic-grey textarea, .basic-grey select, .basic-grey input[type="password"], input[type="url"] {
     border: 1px solid #DADADA;
     color: #888;
     height: 30px;

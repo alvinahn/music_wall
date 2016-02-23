@@ -9,9 +9,11 @@
     <% youtube_last = track.url[32, track.url.length] %>
     <% youtube_modified_link = youtube_last.gsub("&","?") %>
     <iframe width="350" height="300" src="https://www.youtube.com/embed/<%= youtube_modified_link %>" frameborder="0" allowfullscreen></iframe>
-    <% if track.user_id != nil %>
-      <p>Created by <%= User.find(track.user_id).email %></p>
-    <% end %>
+    <p class="from1">Created by <%= User.find(track.user_id).email %></p>
+    <form class="right" method="GET" action="/tracks/vote/<%= track.id %>">
+      <button  type="submit" name="vote_count" value="Vote"></button>Vote: <%= track.vote_count %>
+    </form>
   </div>
 <% end %>
+
 
