@@ -1,8 +1,57 @@
-<h1>Title: <%= @track.title %></h1>
-<p>
-  Author: <%= @track.author %>
-</p>
+<br>
+<br>
+<hr/>
+<br>
 
-<p>
-  URL: <a href="<%= @track.url %>"><%= @track.url %></a>
-</p>
+<div class="col-md-6">
+<h3><%= @track.title %><br><small class="what">(by: <%= @track.author %>)</small></h3>
+  <% youtube_last = @track.url[32, @track.url.length] %>
+  <% youtube_modified_link = youtube_last.gsub("&","?") %>
+  <iframe width="500" height="400" src="https://www.youtube.com/embed/<%= youtube_modified_link %>" frameborder="0" allowfullscreen></iframe>
+  <p class="from1">Created by <%= User.find(@track.user_id).email %>
+  <form class="rightleft" method="POST" action="/tracks/vote/<%= @track.id %>">
+    <button type="submit" name="vote_count" value="Vote"></button>Vote: <%= @track.vote_count %>
+  </form>
+  </p>
+</div>
+
+
+<div class="col-md-6">
+<br>
+<br>
+<form method="post" action="/tracks/<%= @track.id %>">
+  <% if session["user"] != nil %>
+    <p>Write your review here</p>
+    <textarea rows="2" cols="76" name="content"></textarea>
+    <button class="customizebutton">Submit</button>
+  <% else %>
+    <p>Please sign in or sign up to write a review</p>
+    <textarea rows="2" cols="76" name="content"></textarea>
+  <% end %>
+</form>
+  <br>
+  <hr/>
+  <h3>Review</h3>
+  <ul>
+  <% @review.each do |review| %>
+    <li><%= review.content %> </li>
+    <% if session["user"] == review.user_id %>
+      <div class="textrightdelete">-<%= User.find(review.user_id).email %></div>
+      <form class="inline" method="post" action="/reviews/<%= review.id %>">
+        <input class="deletebutton" type="submit" name="delete" value="Delete">
+      </form>
+    <% else %>
+      <div class="textright">-<%= User.find(review.user_id).email %></div>
+    <% end %>
+    <fieldset class="rating">
+    <input type="radio" id="star5" name="rating" value="5" /><label class = "full" for="star5" title="Awesome - 5 stars"></label>
+    <input type="radio" id="star4" name="rating" value="4" /><label class = "full" for="star4" title="Pretty good - 4 stars"></label>
+    <input type="radio" id="star3" name="rating" value="3" /><label class = "full" for="star3" title="Meh - 3 stars"></label>
+    <input type="radio" id="star2" name="rating" value="2" /><label class = "full" for="star2" title="Kinda bad - 2 stars"></label>
+    <input type="radio" id="star1" name="rating" value="1" /><label class = "full" for="star1" title="Sucks big time - 1 star"></label>
+</fieldset>
+    <br>
+    <br>
+  <% end %>
+  </ul>
+</div>

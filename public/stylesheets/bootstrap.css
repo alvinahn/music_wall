@@ -5,7 +5,7 @@
  */
 /*! normalize.css v3.0.3 | MIT License | github.com/necolas/normalize.css */
 html {
-  font-family: sans-serif;
+  font-family: "Copperplate", sans-serif;
   -webkit-text-size-adjust: 100%;
       -ms-text-size-adjust: 100%;
 }
@@ -117,8 +117,7 @@ samp {
 button,
 input,
 optgroup,
-select,
-textarea {
+select {
   margin: 0;
   font: inherit;
   color: inherit;
@@ -1090,7 +1089,7 @@ html {
   -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
 }
 body {
-  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-family: "Copperplate", "Helvetica Neue", Helvetica, Arial, sans-serif;
   font-size: 14px;
   line-height: 1.42857143;
   color: #333;
@@ -1100,7 +1099,7 @@ input,
 button,
 select,
 textarea {
-  font-family: inherit;
+  font-family: "Copperplate", inherit;
   font-size: inherit;
   line-height: inherit;
 }
@@ -1194,7 +1193,7 @@ h6,
 .h4,
 .h5,
 .h6 {
-  font-family: inherit;
+  font-family: "Copperplate";
   font-weight: 500;
   line-height: 1.1;
   color: inherit;
@@ -1495,7 +1494,7 @@ blockquote {
   font-size: 17.5px;
   border-left: 5px solid #eee;
 }
-blockquote p:last-child,
+blockquote p:last-child,col-md-4
 blockquote ul:last-child,
 blockquote ol:last-child {
   margin-bottom: 0;

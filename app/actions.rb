@@ -3,7 +3,7 @@ require 'pry'
 enable :sessions
 
 get '/' do
-  @tracks = Track.all
+  @tracks = Track.all.order(vote_count: :DESC)
   if session["user"] != nil
     @user = User.find(session["user"])
   end
@@ -11,7 +11,7 @@ get '/' do
 end
 
 get '/tracks' do
-  @tracks = Track.all
+  @tracks = Track.all.order(vote_count: :DESC)
   erb :'tracks/index'
 end
 
@@ -35,7 +35,47 @@ end
 
 get '/tracks/:id' do
   @track = Track.find params[:id]
+  @review = Review.where(track_id: params[:id]).order(created_at: :DESC)  
   erb :'tracks/show'
+end
+
+def first_review?
+  Review.find_by(track_id: params[:id], user_id: session["user"]) == nil
+end
+
+def duplicated_review?
+  @review.user_id == session["user"]
+end
+
+post '/tracks/:id' do
+  if session["user"] != nil
+    if first_review?
+      @review = Review.new(
+        content: params[:content],
+        track_id: params[:id],
+        user_id: session["user"]
+      )
+      @review.track.review_count += 1
+      @review.track.save
+      @review.save
+    else
+      @review = Review.new(
+        content: params[:content],
+        track_id: params[:id],
+        user_id: session["user"]
+      )
+      if duplicated_review?
+        puts "you are a duplicated reviewer"
+      else
+        @review.track.review_count += 1
+        @review.save
+        @review.track.save
+      end
+    end
+  end
+  @track = Track.find params[:id]
+  @review = Review.find_by(track_id: params[:id])
+  redirect "/tracks/#{params[:id]}"
 end
 
 get '/users/signup' do
@@ -83,7 +123,7 @@ def duplicated_vote?
   @vote.user_id == session["user"]
 end
 
-get '/tracks/vote/:id' do
+post '/tracks/vote/:id' do
   if session["user"] != nil
     if first_vote?
       @vote = Vote.new(
@@ -110,6 +150,14 @@ get '/tracks/vote/:id' do
       end
     end
   end
-  @tracks = Track.all
-  erb :'/tracks/index'
+  @tracks = Track.all.order(vote_count: :DESC)
+  redirect :'/tracks'
+end
+
+post '/reviews/:id' do
+  # binding.pry
+  @review = Review.find(params[:id])
+  @track = Track.find(@review.track_id)
+  @review.destroy
+  redirect "/tracks/#{@track.id}"
 end

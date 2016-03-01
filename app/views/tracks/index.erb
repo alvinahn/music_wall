@@ -1,16 +1,16 @@
-<h1 class="text-center">Track List</h1>
+<h1 class="text-center">Playlist</h1>
 
 <hr>
 <a href="tracks/new"><h3 class="more_track">Add More Tracks</h3></a>
 
 <% @tracks.each do |track| %>
   <div class="col-md-4" class="track">
-    <h3><a href="/tracks/<%= track.id %>"><%= track.title %></a> <small>(by: <%= track.author %>)</small></h3>
+    <h3><a href="/tracks/<%= track.id %>"><%= track.title %></a> <br><small class="right">(by: <%= track.author %>)</small></h3>
     <% youtube_last = track.url[32, track.url.length] %>
     <% youtube_modified_link = youtube_last.gsub("&","?") %>
     <iframe width="350" height="300" src="https://www.youtube.com/embed/<%= youtube_modified_link %>" frameborder="0" allowfullscreen></iframe>
     <p class="from1">Created by <%= User.find(track.user_id).email %></p>
-    <form class="right" method="GET" action="/tracks/vote/<%= track.id %>">
+    <form class="right" method="POST" action="/tracks/vote/<%= track.id %>"
       <button  type="submit" name="vote_count" value="Vote"></button>Vote: <%= track.vote_count %>
     </form>
   </div>
