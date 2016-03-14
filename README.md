@@ -1,10 +1,9 @@
-Sinatra
+Music Wall App
 =============
 
-Brought to you by Lighthouse Labs
+By Alvin Ahn
 
-## Getting Started
+## Information
 
-1. `bundle install`
-2. `shotgun -p 3000 -o 0.0.0.0`
-3. Visit `http://localhost:3000/` in your browser
+- Used Ruby, HTML, CSS, ActiveRecord, Sinatra
+- An app to share songs through embedded YouTube videos and then vote on favourites. My first implementation of Sinatra and ActiveRecord. Styled with Twitter Bootstrap
