@@ -1600,6 +1600,10 @@ pre code {
   margin-left: auto;
   margin-top: 20px;
   background-image: url(../image/83691-music-background-dark.jpg);
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
 }
 @media (min-width: 768px) {
   .container {
