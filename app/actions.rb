@@ -1,5 +1,4 @@
 # Homepage (Root path)
-require 'pry'
 enable :sessions
 
 get '/' do
